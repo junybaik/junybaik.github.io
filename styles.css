@@ -1,0 +1,262 @@
+/*
+ * Pay Me Right — site styles.
+ *
+ * One stylesheet, no build step, no fonts or scripts fetched from anywhere.
+ * Colours are declared once as custom properties and overridden for dark mode,
+ * so a colour is never hard-coded a second time somewhere else in the file.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #ffffff;
+  --bg-subtle: #f5f6f8;
+  --text: #16181d;
+  --text-muted: #565d68;
+  --border: #e1e4e9;
+  --link: #1a4fd6;
+  --link-hover: #143da8;
+  --focus: #1a4fd6;
+
+  --radius: 10px;
+  --measure: 44rem;
+  --gutter: 1.25rem;
+
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101216;
+    --bg-subtle: #171a20;
+    --text: #e8eaee;
+    --text-muted: #a8afbb;
+    --border: #2b303a;
+    --link: #9bbcff;
+    --link-hover: #c2d5ff;
+    --focus: #9bbcff;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.site-header,
+main,
+.site-footer {
+  width: 100%;
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+
+/* Focus --------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: var(--bg);
+  color: var(--link);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  left: var(--gutter);
+  top: var(--gutter);
+}
+
+/* Header and footer ---------------------------------------------------- */
+
+.site-header {
+  padding: 1.75rem 0 0.5rem;
+}
+
+.site-name {
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-name:hover {
+  color: var(--link);
+}
+
+main {
+  flex: 1 0 auto;
+  padding-bottom: 3rem;
+}
+
+.site-footer {
+  flex: none;
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 0 2.5rem;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.site-footer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.5rem;
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* Typography ----------------------------------------------------------- */
+
+h1 {
+  margin: 1.25rem 0 0.75rem;
+  font-size: clamp(1.75rem, 1.45rem + 1.5vw, 2.25rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  margin: 2.25rem 0 0.5rem;
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  letter-spacing: -0.005em;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 2px;
+  transition: color 0.12s ease-in-out;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+.lede {
+  font-size: 1.0625rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.note {
+  padding: 0.75rem 0.9rem;
+  background: var(--bg-subtle);
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.updated {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+ul.plain,
+ol.plain {
+  padding-left: 1.25rem;
+  margin: 0 0 1rem;
+}
+
+ul.plain li,
+ol.plain li {
+  margin-bottom: 0.4rem;
+}
+
+/* Page link list ------------------------------------------------------- */
+
+/*
+ * Full-width rows separated by hairlines. Each row is one tap target and stays
+ * comfortably above the 44px minimum at every text size.
+ */
+.link-list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.link-list li {
+  border-bottom: 1px solid var(--border);
+}
+
+.link-list a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 1rem;
+  padding: 0.9rem 0.25rem;
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.link-list a:hover {
+  color: var(--link);
+}
+
+.link-list .hint {
+  color: var(--text-muted);
+  font-weight: 400;
+  font-size: 0.9375rem;
+}
+
+/* Contact -------------------------------------------------------------- */
+
+.email {
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.card {
+  padding: 1rem 1.1rem;
+  background: var(--bg-subtle);
+  border-radius: var(--radius);
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
